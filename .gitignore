@@ -1,0 +1,8 @@
+# Local Claude Code permissions — machine-specific, not project state
+.claude/settings.local.json
+
+# Project knowledge vault — kept local, deliberately not versioned
+.claudevault/
+
+# macOS
+.DS_Store

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>chromama</title>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <header>
+      <h1>chromama</h1>
+      <p class="sub">Reclaim RAM and attention from a thousand open tabs.</p>
+    </header>
+
+    <section class="stats" id="stats"></section>
+
+    <section class="panel" id="panel-diagnostics">
+      <h2>Diagnostics</h2>
+      <p class="note">
+        Two questions block the roadmap. Answer them before building anything on top.
+      </p>
+
+      <div class="test">
+        <div class="test-head">
+          <div>
+            <strong>1. Does move/group preserve discard?</strong>
+            <p class="note">
+              Runs on its own scratch tabs in throwaway windows. Never touches yours.
+              If this fails, reorganizing tabs would reload them and spike memory.
+            </p>
+          </div>
+          <div class="row" style="margin: 0; flex-direction: column; align-items: stretch">
+            <button id="run-discard-test">Run test</button>
+            <button id="run-discard-test-remote" class="ghost small">Retry vs. real site</button>
+          </div>
+        </div>
+        <div class="output" id="out-discard-test" hidden></div>
+      </div>
+
+      <div class="test">
+        <div class="test-head">
+          <div>
+            <strong>2. How much memory does a discard sweep reclaim?</strong>
+            <p class="note">
+              Discards every eligible tab and measures system memory before/after.
+              Touches your real tabs — but discarding is reversible: click a tab to reload it.
+              System-wide measurement, so treat the number as directional.
+            </p>
+          </div>
+          <button id="run-memory-test" class="danger">Run sweep</button>
+        </div>
+        <div class="output" id="out-memory-test" hidden></div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-organize">
+      <h2>Organize by topic</h2>
+      <p class="note">
+        Categories become windows; sub-groups become collapsed tab groups inside them.
+        The taxonomy is saved and reused, so re-runs put tabs in the same places instead
+        of reshuffling them.
+      </p>
+
+      <h3>1 · What would leave this machine</h3>
+      <p class="note">
+        Dry run. Sends nothing — shows the exact tabs, the token count, and the cost.
+      </p>
+      <div class="row">
+        <button id="btn-plan" class="ghost">Preview</button>
+        <button id="btn-plan-list" class="ghost small">Show the exact URLs</button>
+      </div>
+      <div class="output" id="out-plan" hidden></div>
+
+      <h3>2 · Taxonomy</h3>
+      <div id="taxonomy-view"></div>
+      <label>
+        One category per line, as <code>Name: description</code>. Edit freely before saving.
+        <textarea id="taxonomy-edit" rows="8" spellcheck="false"></textarea>
+      </label>
+      <div class="row">
+        <button id="btn-propose">Propose from my tabs</button>
+        <button id="btn-save-taxonomy" class="ghost">Save taxonomy</button>
+      </div>
+      <div class="output" id="out-taxonomy" hidden></div>
+
+      <h3>3 · Classify and apply</h3>
+      <div class="row">
+        <button id="btn-classify">Classify tabs</button>
+        <button id="btn-apply" class="danger" disabled>Apply layout</button>
+      </div>
+      <div class="output" id="out-organize" hidden></div>
+    </section>
+
+    <section class="panel">
+      <h2>Actions</h2>
+      <div class="row">
+        <button id="btn-discard">Discard eligible tabs</button>
+        <button id="btn-snapshot">Take snapshot</button>
+        <button id="btn-refresh" class="ghost">Refresh</button>
+      </div>
+      <div class="output" id="out-actions" hidden></div>
+    </section>
+
+    <section class="panel">
+      <h2>Candidates <span class="note">— heuristics only, no model involved</span></h2>
+      <div class="row">
+        <button id="btn-find-stale" class="ghost">Find stale tabs</button>
+        <button id="btn-find-dupes" class="ghost">Find duplicates</button>
+      </div>
+      <div id="candidates"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Archive <span class="count" id="archive-count"></span></h2>
+      <div id="archive-list" class="list"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Snapshots <span class="note">— undo</span></h2>
+      <div id="snapshot-list" class="list"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Settings</h2>
+      <label>
+        Anthropic API key — stored in this extension's local storage, never synced
+        <input type="password" id="set-api-key" placeholder="sk-ant-..." spellcheck="false" />
+      </label>
+      <label>
+        Stale after (days)
+        <input type="number" id="set-stale-days" min="1" max="365" />
+      </label>
+      <label>
+        Excluded domains — never archived, and never sent anywhere once the AI layer exists
+        <textarea id="set-excluded" rows="6" spellcheck="false"></textarea>
+      </label>
+      <div class="row">
+        <button id="btn-save-settings">Save settings</button>
+      </div>
+      <div class="output" id="out-settings" hidden></div>
+    </section>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

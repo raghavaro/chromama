@@ -1,0 +1,150 @@
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --panel: #f6f6f7;
+  --border: #e0e0e3;
+  --text: #1a1a1c;
+  --muted: #6a6a72;
+  --accent: #2f6feb;
+  --danger: #c0392b;
+  --ok: #1e7a4c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161618;
+    --panel: #1e1e21;
+    --border: #303036;
+    --text: #e8e8ea;
+    --muted: #9a9aa4;
+    --accent: #6ea8ff;
+    --danger: #ef6c5a;
+    --ok: #4bcf8e;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+  max-width: 860px;
+  font: 15px/1.6 system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+header { margin-bottom: 28px; }
+h1 { margin: 0; font-size: 26px; letter-spacing: -0.02em; }
+h2 { margin: 0 0 12px; font-size: 16px; font-weight: 650; }
+h3 {
+  margin: 22px 0 6px;
+  font-size: 13px;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+input[type='password'] { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.cat { display: flex; align-items: center; gap: 8px; padding: 4px 0; font-size: 13.5px; }
+.swatch { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+.cat .desc { color: var(--muted); font-size: 12.5px; }
+.sub, .note { color: var(--muted); }
+.sub { margin: 4px 0 0; }
+.note { font-size: 13px; font-weight: 400; margin: 4px 0 0; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.stat .n { font-size: 22px; font-weight: 650; letter-spacing: -0.02em; }
+.stat .k { font-size: 12px; color: var(--muted); }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+
+.row { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; }
+
+button {
+  font: inherit;
+  font-size: 14px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+button:hover { filter: brightness(1.08); }
+button:disabled { opacity: 0.5; cursor: default; filter: none; }
+button.ghost { background: transparent; border-color: var(--border); color: var(--text); }
+button.danger { background: var(--danger); }
+button.small { padding: 3px 9px; font-size: 12.5px; }
+
+.test { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 14px; }
+.test:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+.test-head { display: flex; gap: 16px; align-items: flex-start; justify-content: space-between; }
+.test-head > div { flex: 1; }
+.test-head button { flex: none; }
+
+.output {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12.5px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+.verdict { font-weight: 650; margin-bottom: 8px; }
+.verdict.pass { color: var(--ok); }
+.verdict.fail { color: var(--danger); }
+.verdict.unknown { color: var(--muted); }
+
+.list { margin-top: 8px; max-height: 340px; overflow-y: auto; }
+.item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+}
+.item:last-child { border-bottom: 0; }
+.item .title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.item .meta { color: var(--muted); font-size: 12px; flex: none; }
+.item img { width: 16px; height: 16px; flex: none; }
+
+label { display: block; margin-top: 12px; font-size: 13.5px; color: var(--muted); }
+input[type='number'], textarea {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  font: inherit;
+  font-size: 14px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+}
+textarea { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
+input[type='number'] { max-width: 140px; }
+
+.count { color: var(--muted); font-weight: 400; font-size: 13px; }
+.empty { color: var(--muted); font-size: 13.5px; padding: 8px 0; }

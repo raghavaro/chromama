@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>chromama scratch tab</title>
+    <style>
+      body {
+        font: 14px/1.6 system-ui, sans-serif;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        height: 100vh;
+        background: #1c1c1e;
+        color: #e6e6e6;
+      }
+      div { text-align: center; opacity: 0.75; }
+      code { color: #7ec8e3; }
+    </style>
+  </head>
+  <body>
+    <div>
+      <p><strong>chromama scratch tab</strong></p>
+      <p>Created by the discard-preservation test. Closes itself when the test finishes.</p>
+      <p><code>src/ui/test-page.html</code></p>
+    </div>
+    <script>
+      // A little heap so the tab has something to actually discard.
+      window.__ballast = new Array(200_000).fill('chromama');
+    </script>
+  </body>
+</html>
